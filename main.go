@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/songgao/water"
+	"os/exec"
 )
 
 // NewConfig 创建Config
@@ -26,4 +27,9 @@ func main() {
 		return
 	}
 
+	cmd := exec.Command("ip", "addr", "add", "10.1.1.100/24", "dev", ifce.Name())
+	_ = cmd.Run()
+
+	cmd = exec.Command("ip", "link", "set", "dev", ifce.Name(), "up")
+	_ = cmd.Run()
 }
